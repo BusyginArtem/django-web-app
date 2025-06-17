@@ -15,9 +15,13 @@ RUN apt-get update && apt-get install -y curl xz-utils && \
 COPY requirements.txt /app/
 
 RUN pip install --upgrade pip && \
-    pip install -r requirements.txt && \
-    pip install 'django-tailwind[reload]'
+    pip install -r requirements.txt
 
+COPY theme/static_src/package.json /app/theme/static_src/
+WORKDIR /app/theme/static_src
+RUN npm install
+
+WORKDIR /app
 COPY . /app/
 
 EXPOSE 8000

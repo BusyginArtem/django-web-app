@@ -176,6 +176,7 @@ cython_debug/
 postgres_data/
 mysql_data/
 redis_data/
+main_db
 
 # Mac OS
 .DS_Store

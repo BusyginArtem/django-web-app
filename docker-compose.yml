@@ -1,6 +1,11 @@
+x-app: &default-app
+  build:
+    context: "."
+  restart: "unless-stopped"
+
 services:
   web:
-    build: .
+    <<: *default-app
     container_name: django-docker
     ports:
       - "8080:8000"
@@ -8,25 +13,22 @@ services:
       - .:/app
     depends_on:
       - db
-    environment:
-      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
-      DEBUG: ${DEBUG}
-      DJANGO_LOGLEVEL: ${DJANGO_LOGLEVEL}
-      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
-      DATABASE_ENGINE: ${DATABASE_ENGINE}
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_USERNAME: ${DATABASE_USERNAME}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-      DATABASE_HOST: ${DATABASE_HOST}
-      DATABASE_PORT: ${DATABASE_PORT}
     env_file:
       - .env
-    command: >
-      sh -c "
-        python manage.py migrate &&
-        python manage.py runserver 0.0.0.0:8000 &&
-        python manage.py tailwind start
-      "
+    command: "python manage.py runserver 0.0.0.0:8000"
+
+  tailwind:
+    <<: *default-app
+    container_name: tailwind-watcher
+    depends_on:
+      - web
+    command: "python manage.py tailwind start"
+    volumes:
+      - .:/app
+      - node_modules:/app/theme/static_src/node_modules
+    tty: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
 
   db:
     image: postgres:latest
@@ -44,3 +46,4 @@ services:
 
 volumes:
   postgres_data:
+  node_modules:
