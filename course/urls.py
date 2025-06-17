@@ -21,7 +21,7 @@ from django.urls import include, path
 from main import urls as main_urls
 
 urlpatterns = [
-    path("", include(main_urls)),
+    path("", include(main_urls, namespace="main")),
     path("admin/", admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
