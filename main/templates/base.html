@@ -10,25 +10,30 @@
     {% tailwind_css %}
   </head>
 
-  <body class="leading-normal tracking-normal h-screen flex flex-col">
-    <header class="sticky top-0 z-50">
-      <nav class="p-6 flex justify-end">
+  <body class="leading-normal tracking-normal h-screen flex flex-col relative">
+    <header class="fixed top-0 z-1 w-full min-h-16 left-0 right-0 backdrop-blur-sm">
+      <nav class="mx-8 p-8 flex justify-end">
         <ul class="flex space-x-4">
-          <li><a href="{% url 'main:index' %}" class="hover:underline">Home</a></li>
-          <li><a href="{% url 'main:about' %}" class="hover:underline">About</a></li>
-          {% comment %}
-          <li><a href="{% url 'main:contact' %}" class="hover:underline">Contact</a></li>
-          {% endcomment %}
+          <li><a href="{% url 'main:index' %}" class="hover:underline text-zinc-300 font-bold">Home</a></li>
+          <li><a href="{% url 'main:about' %}" class="hover:underline text-zinc-300 font-bold">About</a></li>
         </ul>
       </nav>
     </header>
-    <main class="flex-1">{% block 'body' %} {% endblock 'body' %}</main>
 
-    <footer class="p-4 text-center">
+    <main class="flex-1 container">{% block 'main' %} {% endblock 'main' %}</main>
+
+    {% if True %}
+    <video autoplay loop muted class="absolute inset-0 h-full w-full object-cover">
+      <source src="{% static '/videos/bg.mp4' %}" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    {% endif %}
+
+    <footer class="p-4 text-center fixed bottom-0 w-full z-1 bg-transparent min-h-16">
       {% block 'footer' %}
-      <p>&copy; 2023 My Django Project</p>
+      <p>&copy; 2025 My Django Project</p>
       {% endblock 'footer' %}
-      <p>&copy; 2023 My Django Project</p>
+      <p class="font-bold text-zinc-800">&copy; 2025 My Django Project</p>
     </footer>
   </body>
 </html>

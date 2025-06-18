@@ -1,11 +1,7 @@
-{% extends 'base.html' %}
-{% comment %} {% load static %} {% endcomment %}
-
-{% block 'body' %}
-<section class="">
-    <h1 class="text-5xl text-pink-500 text-center">Index page</h1>
+{% extends 'base.html' %} {% load static %} {% block 'main' %}
+<section class="relative flex items-center justify-center overflow-hidden h-screen">
+  <h1 class="text-5xl text-center z-1">Index page</h1>
 </section>
-{% endblock %}
-
-{% block 'footer' %}
-{% endblock %}
+{% endblock %} {% block 'footer' %}
+<span></span>
+{% endblock 'footer' %}
