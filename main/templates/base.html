@@ -11,12 +11,18 @@
   </head>
 
   <body class="leading-normal tracking-normal h-screen flex flex-col relative">
-    <header class="fixed top-0 z-1 w-full min-h-16 left-0 right-0 backdrop-blur-sm">
-      <nav class="mx-8 p-8 flex justify-end">
+    <header class="fixed top-0 z-1 w-full left-0 right-0 backdrop-blur-xs">
+      <nav class="mx-8 px-8 py-4 flex justify-end">
+        {% with request.resolver_match.url_name as url_name %}
         <ul class="flex space-x-4">
-          <li><a href="{% url 'main:index' %}" class="hover:underline text-zinc-300 font-bold">Home</a></li>
-          <li><a href="{% url 'main:about' %}" class="hover:underline text-zinc-300 font-bold">About</a></li>
+          <li>
+            <a href="{% url 'main:home' %}" class="{% if url_name == 'home' %}underline{% endif %} nav-link">Home</a>
+          </li>
+          <li>
+            <a href="{% url 'main:about' %}" class="{% if url_name == 'about' %}underline{% endif %} nav-link">About</a>
+          </li>
         </ul>
+        {% endwith %}
       </nav>
     </header>
 
@@ -31,9 +37,9 @@
 
     <footer class="p-4 text-center fixed bottom-0 w-full z-1 bg-transparent min-h-16">
       {% block 'footer' %}
-      <p>&copy; 2025 My Django Project</p>
+      <p>&copy; {% now "Y"  %} My Django Project</p>
       {% endblock 'footer' %}
-      <p class="font-bold text-zinc-800">&copy; 2025 My Django Project</p>
+      <p class="font-bold text-zinc-800">&copy; {% now "Y" %} My Django Project</p>
     </footer>
   </body>
 </html>

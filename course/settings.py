@@ -159,4 +159,4 @@ STATICFILES_DIRS = [
     BASE_DIR / "theme" / "static" / "css" / "dist",
 ]
 
-# NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"

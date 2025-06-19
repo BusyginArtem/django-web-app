@@ -135,4 +135,8 @@
       font-size: 1rem;
     }
   }
+
+  .nav-link {
+    @apply underline-offset-3 decoration-2 hover:underline hover:text-zinc-400 text-zinc-300 font-bold;
+  }
 }
